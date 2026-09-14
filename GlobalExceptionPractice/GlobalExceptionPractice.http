@@ -1,0 +1,6 @@
+@GlobalExceptionPractice_HostAddress = http://localhost:5095
+
+GET {{GlobalExceptionPractice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
