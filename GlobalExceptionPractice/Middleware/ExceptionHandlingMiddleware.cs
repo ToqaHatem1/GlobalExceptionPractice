@@ -39,6 +39,11 @@ namespace GlobalExceptionPractice.Middleware
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
                 message = exception.Message;
             }
+            else if (exception is BadRequestException)
+            {
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                message = exception.Message;
+            }
             else
             {
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;

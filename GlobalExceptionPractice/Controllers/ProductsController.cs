@@ -27,5 +27,10 @@ namespace GlobalExceptionPractice.Controllers
         { 
             throw new Exception("Something unexpected happened."); 
         }
+        [HttpGet("badRequest")]
+        public IActionResult GetBadRequest()
+        {
+            throw new BadRequestException("Bad request.");
+        }
     }
 }
