@@ -1,4 +1,5 @@
 ﻿using GlobalExceptionPractice.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GlobalExceptionPractice.Middleware
 {
@@ -49,13 +50,15 @@ namespace GlobalExceptionPractice.Middleware
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 message = "An unexpected error occurred.";
             }
-            var response = new
+            var problemDetails = new ProblemDetails
             {
-                statusCode = context.Response.StatusCode,
-                message,
-                timestamp = DateTime.UtcNow
+                Status = context.Response.StatusCode,
+                Title = message,
+                Detail = message,
+                Instance = context.Request.Path //endpoint(URL) that has the problem
             };
-            await context.Response.WriteAsJsonAsync(response); //object -> json, and write it in HTTP response body
+
+            await context.Response.WriteAsJsonAsync(problemDetails); //object -> json, and write it in HTTP response body
         }
     }
 }
